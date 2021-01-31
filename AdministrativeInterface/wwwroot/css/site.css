@@ -1,0 +1,27 @@
+﻿input, select {
+    width:300px !important;
+}
+
+textarea {
+    width: 395px !important;
+}
+
+form div label {
+    min-width:90px;
+}
+
+.list-group li {
+    padding:0px;
+}
+
+.list-group li:hover {
+    background-color: lightgray;
+}
+
+.list-group li a{
+    margin:0px;
+    display:block;
+    width:100%;
+    height:100%;
+    padding:10px;
+}

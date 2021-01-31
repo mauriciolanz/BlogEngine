@@ -1,0 +1,55 @@
+﻿@model HomeModel
+@{
+    ViewData["Title"] = "Blog Engine";
+}
+
+@* -- Begin Categories --*@
+<div class="row mt-3">
+    <div class="col-md-4">
+        <h3 class="float-left">Categories</h3>
+        <a asp-controller="Category" asp-action="Add" class="btn btn-primary float-right">Add</a>
+    </div>
+</div>
+
+<div class="row mt-3">
+    <div class="col-md-4">
+        <ul class="list-group">
+            @foreach (var category in Model.Categories)
+            {
+                <li class="list-group-item list-group-item-action">
+                    <a asp-controller="Category" asp-action="Edit" asp-route-id="@category.Id">
+                        @category.Title
+                    </a>
+                </li>
+            }
+        </ul>
+    </div>
+</div>
+
+@* -- End Categories --*@
+
+
+@* -- Begin Posts --*@
+<div class="row mt-5">
+    <div class="col-md-4">
+        <h3 class="float-left">Posts</h3>
+        <a asp-controller="Post" asp-action="Add" class="btn btn-primary float-right">Add</a>
+    </div>
+</div>
+
+<div class="row mt-3">
+    <div class="col-md-4">
+        <ul class="list-group">
+            @foreach (var post in Model.Posts)
+            {
+                <li class="list-group-item list-group-item-action">
+                    <a asp-controller="Post" asp-action="Edit" asp-route-id="@post.Id">
+                        @post.Title
+                    </a>
+                </li>
+            }
+        </ul>
+    </div>
+</div>
+
+@* -- End Posts --*@

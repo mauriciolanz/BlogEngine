@@ -1,0 +1,78 @@
+﻿@model PostModel
+@{
+    var pageTitle = (Model != null && Model.Id.HasValue && Model.Id > 0) ? "Edit Post" : "Add Post";
+    ViewData["Title"] = "Blog Engine - " + pageTitle;
+}
+
+<div class="row mt-3">
+    <div class="col-md-12 text-left">
+        <h3>@pageTitle</h3>
+    </div>
+</div>
+
+<div>
+    <form asp-controller="Post" asp-action="Save" method="post">
+
+        <input asp-for="Id" type="hidden" />
+
+        <div class="row mt-3 form-group form-inline">
+            <div class="col-md-12 text-left">
+                <label asp-for="Title" class="d-inline-block"></label>
+                <input asp-for="Title" class="form-control d-inline-block" />
+                <small class="form-text text-danger ml-2 d-inline-block" data-valmsg-for="Title" data-valmsg-replace="true"></small>
+            </div>
+        </div>
+
+        <div class="row mt-3 form-group form-inline">
+            <div class="col-md-12 text-left">
+                <label asp-for="CategoryId" class="d-inline-block"></label>
+
+                <select asp-for="CategoryId" asp-items="@(new SelectList(ViewBag.Categories, "Id", "Title"))" class="form-control d-inline-block">
+                    <option value="">Please select one</option>
+                </select>
+
+                <small class="form-text text-danger ml-2 d-inline-block" data-valmsg-for="CategoryId" data-valmsg-replace="true"></small>
+            </div>
+        </div>
+
+        <div class="row mt-3 form-group form-inline">
+            <div class="col-md-12 text-left">
+                <label asp-for="PublicationDate" class="d-inline-block"></label>
+                <input asp-for="PublicationDate" class="form-control d-inline-block" type="date" asp-format="{0:yyyy-MM-dd}" />
+                <small class="form-text text-danger ml-2 d-inline-block" data-valmsg-for="PublicationDate" data-valmsg-replace="true"></small>
+            </div>
+        </div>
+
+
+        <div class="row mt-3 form-group">
+            <div class="col-md-12 text-left">
+                <label asp-for="Content" class="d-block"></label>
+                <textarea asp-for="Content" class="form-control  d-inline"></textarea>
+                <small class="form-text text-danger ml-2 d-inline-block" data-valmsg-for="Content" data-valmsg-replace="true"></small>
+            </div>
+        </div>
+
+        <div class="row mt-3 form-group">
+            <div class="col-md-12 text-left">
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+
+        @if (ViewBag.ErrorMessages != null)
+        {
+            <div class="row mt-3 form-group">
+                <div class="col-md-12 text-left">
+                    @foreach (var message in ViewBag.ErrorMessages)
+                    {
+                        <small class="form-text text-danger">@message</small><br />
+                    }
+                </div>
+            </div>
+        }
+
+    </form>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}
